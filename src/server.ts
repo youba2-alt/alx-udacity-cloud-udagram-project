@@ -39,7 +39,7 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
           deleteLocalFiles([filteredpath]);
         } );
       } ).catch( error =>{
-        res.status(420).send({ "message": "error processing your image, actually there is an error with .jpg images.", "error": error})
+        res.status(422).send({ "message": "error processing your image, actually there is an error with .jpg images.", "error": error})
       })
   } );
   
