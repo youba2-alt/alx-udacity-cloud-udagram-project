@@ -34,10 +34,13 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
     if (!image_url) 
       return res.status(400).send('Image url is required');
 
-    const filteredpath = await filterImageFromURL(image_url);
-    res.sendFile(filteredpath, () => {
-      deleteLocalFiles([filteredpath]);
-    } );
+      filterImageFromURL(image_url).then( filteredpath=>{
+        return res.sendFile(filteredpath, () => {
+          deleteLocalFiles([filteredpath]);
+        } );
+      } ).catch( error =>{
+        res.status(420).send({ "message": "error processing your image, actually there is an error with .jpg images.", "error": error})
+      })
   } );
   
   
